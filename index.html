@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow soft</title>
+    <title>Premium Apps Store</title>
     <style>
         /* ============================================
            GLOBAL STYLES & RESET
@@ -17,8 +17,9 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f5f7fa;
+            color: #1a202c;
+            background: linear-gradient(to bottom, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
         }
 
         a {
@@ -30,17 +31,47 @@
            HEADER & STORE NAME
            ============================================ */
         .store-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            padding: 4rem 1.5rem;
             text-align: center;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="20" fill="rgba(255,255,255,0.05)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-60px); }
         }
 
         .store-name {
-            font-size: 3rem;
-            font-weight: 700;
-            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             margin: 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+
+        .store-tagline {
+            font-size: 1.2rem;
+            margin-top: 0.8rem;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
 
         /* ============================================
@@ -48,7 +79,7 @@
            ============================================ */
         .hero-section {
             width: 100%;
-            height: 400px;
+            height: 450px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
@@ -60,52 +91,64 @@
         .hero-section::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.3;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 30s infinite linear;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             text-align: center;
             color: white;
             padding: 2rem;
+            max-width: 800px;
         }
 
         .hero-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.95;
+            font-weight: 300;
         }
 
         /* ============================================
            APPS GRID SECTION
            ============================================ */
         .apps-section {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem 6rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: #1a202c;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
         }
 
         /* ============================================
@@ -113,14 +156,15 @@
            ============================================ */
         .app-card {
             background: white;
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .app-card::before {
@@ -129,15 +173,15 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
         .app-card:hover::before {
@@ -145,163 +189,207 @@
         }
 
         .app-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1.5rem;
-            border-radius: 22px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1.8rem;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: white;
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.35);
+            transition: transform 0.4s ease;
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.08);
         }
 
         .app-name {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2d3748;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #1a202c;
+            letter-spacing: -0.5px;
         }
 
         .app-info {
-            color: #718096;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            min-height: 48px;
         }
 
         .app-stats {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: #a0aec0;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e2e8f0;
         }
 
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .rating {
+            color: #f59e0b;
+        }
+
+        .downloads {
+            color: #10b981;
         }
 
         /* ============================================
            FOOTER STYLES
            ============================================ */
         .footer {
-            background: #2d3748;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             color: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .footer-link {
+        .privacy-button {
+            display: inline-block;
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 1rem 3rem;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.05rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .footer-link:hover {
+        .privacy-button:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-text {
+            margin-top: 2rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
         }
 
         /* ============================================
            APP DETAIL PAGE STYLES
            ============================================ */
         .detail-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .detail-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            border-radius: 28px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .detail-header {
             display: flex;
             align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #e2e8f0;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid #f1f5f9;
         }
 
         .detail-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 26px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 140px;
+            height: 140px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 5rem;
             color: white;
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
             flex-shrink: 0;
         }
 
         .detail-info h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: #1a202c;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .detail-rating {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #718096;
+            gap: 1rem;
             font-size: 1.1rem;
+            color: #64748b;
+            margin-top: 0.5rem;
         }
 
         .stars {
-            color: #f6ad55;
-            font-size: 1.3rem;
+            color: #f59e0b;
+            font-size: 1.4rem;
+            font-weight: bold;
         }
 
         .detail-description {
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            color: #4a5568;
+            margin-bottom: 3rem;
+            line-height: 1.9;
+            color: #475569;
+            font-size: 1.1rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .install-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
             color: white;
-            padding: 1rem 3rem;
+            padding: 1.2rem 3.5rem;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            margin-right: 1rem;
         }
 
         .install-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.6);
         }
 
         .back-button {
             display: inline-block;
-            background: #e2e8f0;
-            color: #2d3748;
-            padding: 1rem 2rem;
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 1.2rem 2.5rem;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
@@ -309,8 +397,8 @@
         }
 
         .back-button:hover {
-            background: #cbd5e0;
-            transform: translateY(-2px);
+            background: #e2e8f0;
+            transform: translateY(-3px);
         }
 
         /* ============================================
@@ -318,24 +406,32 @@
            ============================================ */
         @media (max-width: 768px) {
             .store-name {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            .store-tagline {
+                font-size: 1rem;
             }
 
             .hero-section {
-                height: 300px;
+                height: 350px;
             }
 
             .hero-content h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .hero-content p {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
 
             .apps-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
             }
 
             .detail-header {
@@ -344,13 +440,20 @@
             }
 
             .detail-info h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+            }
+
+            .detail-card {
+                padding: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
             }
 
             .install-button, .back-button {
-                display: block;
-                margin: 0.5rem 0;
                 width: 100%;
+                text-align: center;
             }
         }
 
@@ -364,73 +467,74 @@
 <body>
     <!-- Store Header -->
     <header class="store-header">
-        <h1 class="store-name">Premium App Store</h1>
+        <h1 class="store-name">Premium Apps Store</h1>
+        <p class="store-tagline">Discover the best apps for your lifestyle</p>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
-            <h2>Discover Amazing Apps</h2>
-            <p>The best applications for your daily needs</p>
+            <h2>Transform Your Device</h2>
+            <p>Explore our handpicked collection of powerful applications</p>
         </div>
     </section>
 
     <!-- Apps Grid Section -->
     <section class="apps-section">
-        <h2 class="section-title">Featured Apps</h2>
+        <h2 class="section-title">Featured Applications</h2>
         <div class="apps-grid">
-            <!-- App Card 1 -->
+            <!-- App Card 1: Air Play -->
             <a href="app1.html" class="app-card">
-                <div class="app-icon">📱</div>
-                <h3 class="app-name">App 1</h3>
-                <p class="app-info">Your ultimate productivity companion</p>
+                <div class="app-icon">📺</div>
+                <h3 class="app-name">Air Play: Cast to TV</h3>
+                <p class="app-info">Mirror phone to TV effortlessly! Stream, share & connect with Airplay ease.</p>
                 <div class="app-stats">
-                    <span class="stat-item">⭐ 4.8</span>
-                    <span class="stat-item">📥 100K+</span>
+                    <span class="stat-item rating">⭐ 4.6</span>
+                    <span class="stat-item downloads">📥 100K+</span>
                 </div>
             </a>
 
-            <!-- App Card 2 -->
+            <!-- App Card 2: Reverse Charging -->
             <a href="app2.html" class="app-card">
-                <div class="app-icon">🎮</div>
-                <h3 class="app-name">App 2</h3>
-                <p class="app-info">Entertainment at your fingertips</p>
+                <div class="app-icon">🔋</div>
+                <h3 class="app-name">Reverse Charging Wireless</h3>
+                <p class="app-info">Reverse Charging Wireless app allows users to charge their phone wirelessly.</p>
                 <div class="app-stats">
-                    <span class="stat-item">⭐ 4.9</span>
-                    <span class="stat-item">📥 250K+</span>
+                    <span class="stat-item rating">⭐ 4.4</span>
+                    <span class="stat-item downloads">📥 50K+</span>
                 </div>
             </a>
 
-            <!-- App Card 3 -->
+            <!-- App Card 3: SmartWatch Connect -->
             <a href="app3.html" class="app-card">
-                <div class="app-icon">📸</div>
-                <h3 class="app-name">App 3</h3>
-                <p class="app-info">Capture and edit stunning photos</p>
+                <div class="app-icon">⌚</div>
+                <h3 class="app-name">SmartWatch Connect for Android</h3>
+                <p class="app-info">Connect your phone & smartwatch via Bluetooth and get all notifications.</p>
                 <div class="app-stats">
-                    <span class="stat-item">⭐ 4.7</span>
-                    <span class="stat-item">📥 500K+</span>
+                    <span class="stat-item rating">⭐ 4.5</span>
+                    <span class="stat-item downloads">📥 50K+</span>
                 </div>
             </a>
 
-            <!-- App Card 4 -->
+            <!-- App Card 4: Smart Remote -->
             <a href="app4.html" class="app-card">
-                <div class="app-icon">🎵</div>
-                <h3 class="app-name">App 4</h3>
-                <p class="app-info">Stream millions of songs</p>
+                <div class="app-icon">📱</div>
+                <h3 class="app-name">Smart Remote: Universal TV</h3>
+                <p class="app-info">Controller TV – control, cast & mirror all your smart TVs instantly!</p>
                 <div class="app-stats">
-                    <span class="stat-item">⭐ 4.6</span>
-                    <span class="stat-item">📥 1M+</span>
+                    <span class="stat-item rating">⭐ 4.3</span>
+                    <span class="stat-item downloads">📥 10K+</span>
                 </div>
             </a>
 
-            <!-- App Card 5 -->
+            <!-- App Card 5: Endoscope Camera -->
             <a href="app5.html" class="app-card">
-                <div class="app-icon">💪</div>
-                <h3 class="app-name">App 5</h3>
-                <p class="app-info">Your personal fitness trainer</p>
+                <div class="app-icon">📷</div>
+                <h3 class="app-name">Endoscope Camera / USB OTG</h3>
+                <p class="app-info">Connect USB endoscope cameras to inspect hard-to-reach areas easily.</p>
                 <div class="app-stats">
-                    <span class="stat-item">⭐ 4.8</span>
-                    <span class="stat-item">📥 750K+</span>
+                    <span class="stat-item rating">⭐ 4.2</span>
+                    <span class="stat-item downloads">📥 10K+</span>
                 </div>
             </a>
         </div>
@@ -438,10 +542,10 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-links">
-            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <div class="footer-content">
+            <a href="privacy.html" class="privacy-button">Privacy Policy</a>
+            <p class="footer-text">© 2026 Premium Apps Store. All rights reserved.</p>
         </div>
-        <p style="margin-top: 1.5rem; opacity: 0.8;">© 2026 Premium App Store. All rights reserved.</p>
     </footer>
 </body>
 </html>
