@@ -112,3 +112,64 @@
         }
 
         .back-button {
+            display: inline-block;
+        background: #f1f5f9;
+        color: #1e293b;
+        padding: 1.2rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .back-button:hover {
+        background: #e2e8f0;
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .detail-header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .detail-info h1 {
+            font-size: 1.8rem;
+        }
+
+        .detail-card {
+            padding: 2rem;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .install-button, .back-button {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style><div class="detail-description">
+            <p>Connect USB endoscope cameras to your Android device and inspect hard-to-reach areas with ease! This specialized app provides full support for USB OTG endoscope cameras, making professional inspections accessible to everyone.</p>
+            <br>
+            <p>Perfect for automotive repairs, plumbing inspections, HVAC maintenance, or any situation where you need to see into tight spaces. Capture photos and videos directly from your endoscope camera to document your findings.</p>
+            <br>
+            <p><strong>Key Features:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>USB OTG endoscope camera support</li>
+                <li>Real-time video preview</li>
+                <li>Photo and video capture</li>
+                <li>Brightness and contrast adjustment</li>
+                <li>Zoom functionality</li>
+                <li>Easy file management</li>
+            </ul>
+        </div>
+
+        <div class="button-group">
+            <a href="#" class="install-button">Install Now</a>
+            <a href="index.html" class="back-button">← Back to Store</a>
+        </div>
+    </div>
+</div>
