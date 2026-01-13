@@ -1,11 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Store - Premium Apps</title>
+    <style>
+        /* ============================================
+           GLOBAL STYLES & RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ============================================
+           HEADER & STORE NAME
+           ============================================ */
+        .store-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .store-name {
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 0;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero-section {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           APPS GRID SECTION
+           ============================================ */
+        .apps-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* ============================================
+           APP CARD STYLES
+           ============================================ */
+        .app-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .app-info {
+            color: #718096;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .app-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #a0aec0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ============================================
+           FOOTER STYLES
+           ============================================ */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           APP DETAIL PAGE STYLES
+           ============================================ */
+        .detail-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .detail-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .detail-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .stars {
+            color: #f6ad55;
+            font-size: 1.3rem;
+        }
+
+        .detail-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        .install-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .store-name {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .detail-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .detail-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .install-button, .back-button {
+                display: block;
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to My Store</h1>
-  <p>This is the official store website.</p>
+    <!-- Store Header -->
+    <header class="store-header">
+        <h1 class="store-name">Premium App Store</h1>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Discover Amazing Apps</h2>
+            <p>The best applications for your daily needs</p>
+        </div>
+    </section>
+
+    <!-- Apps Grid Section -->
+    <section class="apps-section">
+        <h2 class="section-title">Featured Apps</h2>
+        <div class="apps-grid">
+            <!-- App Card 1 -->
+            <a href="app1.html" class="app-card">
+                <div class="app-icon">📱</div>
+                <h3 class="app-name">App 1</h3>
+                <p class="app-info">Your ultimate productivity companion</p>
+                <div class="app-stats">
+                    <span class="stat-item">⭐ 4.8</span>
+                    <span class="stat-item">📥 100K+</span>
+                </div>
+            </a>
+
+            <!-- App Card 2 -->
+            <a href="app2.html" class="app-card">
+                <div class="app-icon">🎮</div>
+                <h3 class="app-name">App 2</h3>
+                <p class="app-info">Entertainment at your fingertips</p>
+                <div class="app-stats">
+                    <span class="stat-item">⭐ 4.9</span>
+                    <span class="stat-item">📥 250K+</span>
+                </div>
+            </a>
+
+            <!-- App Card 3 -->
+            <a href="app3.html" class="app-card">
+                <div class="app-icon">📸</div>
+                <h3 class="app-name">App 3</h3>
+                <p class="app-info">Capture and edit stunning photos</p>
+                <div class="app-stats">
+                    <span class="stat-item">⭐ 4.7</span>
+                    <span class="stat-item">📥 500K+</span>
+                </div>
+            </a>
+
+            <!-- App Card 4 -->
+            <a href="app4.html" class="app-card">
+                <div class="app-icon">🎵</div>
+                <h3 class="app-name">App 4</h3>
+                <p class="app-info">Stream millions of songs</p>
+                <div class="app-stats">
+                    <span class="stat-item">⭐ 4.6</span>
+                    <span class="stat-item">📥 1M+</span>
+                </div>
+            </a>
+
+            <!-- App Card 5 -->
+            <a href="app5.html" class="app-card">
+                <div class="app-icon">💪</div>
+                <h3 class="app-name">App 5</h3>
+                <p class="app-info">Your personal fitness trainer</p>
+                <div class="app-stats">
+                    <span class="stat-item">⭐ 4.8</span>
+                    <span class="stat-item">📥 750K+</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="general.html" class="footer-link">General Policy</a>
+        </div>
+        <p style="margin-top: 1.5rem; opacity: 0.8;">© 2026 Premium App Store. All rights reserved.</p>
+    </footer>
 </body>
 </html>
